@@ -1,0 +1,44 @@
+{
+  "name": "base-web-project",
+  "version": "0.0.1",
+  "main": "dist/server.js",
+  "author": "Will Evans <will@will3942.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@fastify/cors": "^8.1.0",
+    "@fastify/helmet": "^10.0.0",
+    "@fastify/static": "^6.5.0",
+    "@fastify/view": "^7.1.0",
+    "@prisma/client": "^4.3.1",
+    "axios": "^0.27.2",
+    "fastify": "^4.5.3",
+    "handlebars": "^4.7.7",
+    "prisma": "^4.3.1"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.3",
+    "@types/node": "^18.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "husky": "^8.0.1",
+    "typescript": "^4.7.4"
+  },
+  "scripts": {
+    "build": "tsc -b && cp -a src/views dist/",
+    "start": "node dist/server.js",
+    "lint": "eslint .",
+    "prisma:generate-client": "prisma generate --schema ./src/lib/database/schema.prisma",
+    "prisma:format-schema": "prisma format --schema ./src/lib/database/schema.prisma",
+    "prisma:migrate-dev": "prisma migrate dev --schema ./src/lib/database/schema.prisma",
+    "prisma:migrate-prod": "prisma migrate deploy --schema ./src/lib/database/schema.prisma"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
+  }
+}
